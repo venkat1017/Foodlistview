@@ -23,8 +23,8 @@
   </head>
   <body ng-app="starter">
     <ion-pane ng-controller="ListController">
-      <ion-header-bar class="bar-dark">
-        <h2 class="title">Artist List</h2>
+      <ion-header-bar class="bar-positive">
+        <h1 class="title">Restro</h1>
       </ion-header-bar>
       <div class="bar bar-subheader 
         item-input-inset bar-light">
@@ -35,13 +35,19 @@
       </div>
       <ion-content ng-controller="ListController" 
         class="has-subheader">
+		<ion-refresher on-refresh="doRefresh()">
+		</ion-refresher>
         <ion-list>
           <ion-item ng-repeat='item in menu | filter: query'
-          class=" item-image item-text-wrap list card">
+          class=" item-image item-text-wrap list card item-icon-right | filter: { name: whichmenu }">
 		  
-            <img ng-src="img/{{item.image}}" class="item-image-wrapper" />
+            <img  ng-src="img/{{item.image}}" class="item-image-wrapper" width="100%"  />
 			<h1>{{item.name}}</h1>
-            
+            <button class="button button-clear icon ion-star button-assertive" ng-click="toggleStar(item)" ng-show="item.star"
+			style=" float: right;margin-left: 289px;position: absolute;"></button>
+			<ion-option-button class="button-dark" ng-click="toggleStar(item)">
+			<i class="icon ion-star"></i></ion-option-button>
+			
           </ion-item>
         </ion-list>
       </ion-content>
