@@ -21,5 +21,18 @@ angular.module('starter', ['ionic'])
 .controller('ListController', ['$scope', '$http', function($scope, $http) {
     $http.get('js/data.json').success(function(data) {
       $scope.menu = data.menu;  
+	  
+	  $scope.toggleStar=function(item)
+	  {
+		  item.star=!item.star;
+	  }
+	  $scope.dorefresh=function(){
+		  $http.get('js/data.json').success(function(data) {
+      $scope.menu = data.menu;  
+	  $scope.broadcasr('scroll.refreshComplete');
+		  });  
+	  }
+	  
+	  
     });
 }]);
